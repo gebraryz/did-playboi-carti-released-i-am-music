@@ -43,39 +43,38 @@ const getAccessToken = async () => {
       'Content-Type': 'application/x-www-form-urlencoded',
       Authorization: `Basic ${btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)}`,
     },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
-    }),
+    body: new URLSearchParams({ grant_type: 'client_credentials' }),
   });
 
   const data = await response.json();
   return data.access_token;
 };
 
-const getLatestAlbum = async (): Promise<Response> => {
+const checkIfAlbumWasReleased = async (): Promise<boolean> => {
+  const PLAYBOIY_CARTI_ID = '699OTQXzgjhIYAHMy9RyPD';
+
   const token = await getAccessToken();
   const request = await fetch(
-    `https://api.spotify.com/v1/artists/699OTQXzgjhIYAHMy9RyPD/albums?` +
-      new URLSearchParams({
-        include_groups: 'album',
-        limit: '1',
-        sort: 'release_date',
-      }),
+    `https://api.spotify.com/v1/artists/${PLAYBOIY_CARTI_ID}/albums?` +
+      new URLSearchParams({ include_groups: 'album', limit: '5' }),
     { headers: { Authorization: `Bearer ${token}` } }
   );
 
-  const response = await request.json();
-  return response;
+  const response = (await request.json()) as Response;
+
+  if (!response || !response.items) {
+    throw new Error('Failed to fetch albums or no albums available');
+  }
+
+  return !!response.items.some(
+    (album) => album.name.toLowerCase() === 'i am music'
+  );
 };
 
 const HomePage: FC = async () => {
-  const data = await getLatestAlbum();
+  const isAvailable = await checkIfAlbumWasReleased();
 
-  const latestAlbum = data.items[0];
-  const isReleased =
-    latestAlbum.name.toLowerCase() === 'i am music'.toLowerCase();
-
-  return <Status isReleased={isReleased} />;
+  return <Status isAvailable={isAvailable} />;
 };
 
 export default HomePage;

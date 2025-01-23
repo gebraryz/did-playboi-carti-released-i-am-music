@@ -40,9 +40,7 @@ const calculateTimeBetweenDates = (time: string) => {
     .join(', ');
 };
 
-export const Status: FC<{
-  isReleased: boolean;
-}> = ({ isReleased }) => {
+export const Status: FC<{ isAvailable: boolean }> = ({ isAvailable }) => {
   const [timeFromIAmMusicAnnouncement, setTimeFromIAmMusicAnnouncement] =
     useState(calculateTimeBetweenDates(TIME_FROM_ANNOUNCEMENT));
   const [timeFromLastAlbumRelease, setTimeFromAnnouncement] = useState(
@@ -68,16 +66,16 @@ export const Status: FC<{
         suppressHydrationWarning
         className={clsx(
           'flex flex-col items-center min-h-screen px-6 lg:text-left text-center',
-          isReleased ? 'justify-center' : 'justify-center lg:justify-start'
+          isAvailable ? 'justify-center' : 'justify-center lg:justify-start'
         )}
       >
         <h1
           className="lg:text-[400px] text-[100px]"
           style={{ fontFamily: 'var(--font-swiss)' }}
         >
-          {isReleased ? 'YES!!!' : 'No.'}
+          {isAvailable ? 'YES!!!' : 'No.'}
         </h1>
-        {isReleased ? (
+        {isAvailable ? (
           <>
             <video autoPlay loop className={styles.video}>
               <source src="/evilj0rdan.mp4" type="video/mp4" />
