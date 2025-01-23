@@ -44,7 +44,7 @@ export const WhatButton: FC<{ className?: string }> = ({ className }) => {
       type="button"
       onClick={play}
       className={clsx(
-        'bg-white text-black py-2 px-4 uppercase font-bold text-xl hover:opacity-60',
+        'bg-white text-black py-2 px-4 uppercase font-bold text-xl hover:opacity-60 cursor-pointer',
         className
       )}
     >

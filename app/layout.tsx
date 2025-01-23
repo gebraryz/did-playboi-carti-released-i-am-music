@@ -1,14 +1,14 @@
 import clsx from 'clsx';
+import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import localFont from 'next/font/local';
 import type { FC, PropsWithChildren } from 'react';
 import '../styles/globals.css';
-import { Metadata } from 'next';
 
 const interFont = Inter({
   display: 'swap',
   subsets: ['latin-ext'],
-  variable: '--font-sans',
+  variable: '--font-inter',
 });
 const swiss911CompressedRegularFont = localFont({
   src: '../fonts/Swiss 911 Compressed Regular.otf',

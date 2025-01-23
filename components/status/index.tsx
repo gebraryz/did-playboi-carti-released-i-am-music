@@ -1,5 +1,4 @@
 'use client';
-import ReactPlayer from 'react-player';
 
 import clsx from 'clsx';
 import dayjs from 'dayjs';
