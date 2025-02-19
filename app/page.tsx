@@ -51,11 +51,11 @@ const getAccessToken = async () => {
 };
 
 const checkIfAlbumWasReleased = async (): Promise<boolean> => {
-  const PLAYBOIY_CARTI_ID = '699OTQXzgjhIYAHMy9RyPD';
+  const PLAYBOI_CARTI_SPOTIFY_ID = '699OTQXzgjhIYAHMy9RyPD';
 
   const token = await getAccessToken();
   const request = await fetch(
-    `https://api.spotify.com/v1/artists/${PLAYBOIY_CARTI_ID}/albums?` +
+    `https://api.spotify.com/v1/artists/${PLAYBOI_CARTI_SPOTIFY_ID}/albums?` +
       new URLSearchParams({ include_groups: 'album', limit: '5' }),
     { headers: { Authorization: `Bearer ${token}` } }
   );
