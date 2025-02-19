@@ -22,20 +22,24 @@ const calculateTimeBetweenDates = (time: string) => {
     diff = dayjs.duration(now.diff(target));
   }
 
-  const months = Math.floor(diff.asMonths());
+  const years = Math.floor(diff.asYears());
+  const months = Math.floor(diff.asMonths()) % 12;
   const days = Math.floor(diff.days() % 30);
   const hours = Math.floor(diff.asHours() % 24);
   const minutes = Math.floor(diff.asMinutes() % 60);
 
   const data = [
-    { value: months, label: 'months' },
-    { value: days, label: 'days' },
-    { value: hours, label: 'hours' },
-    { value: minutes, label: 'minutes' },
+    { value: years, label: 'year', pluralLabel: 'years' },
+    { value: months, label: 'month', pluralLabel: 'months' },
+    { value: days, label: 'day', pluralLabel: 'days' },
+    { value: hours, label: 'hour', pluralLabel: 'hours' },
+    { value: minutes, label: 'minute', pluralLabel: 'minutes' },
   ];
 
   return data
-    .map(({ value, label }) => (value ? `${value} ${label}` : ''))
+    .map(({ value, label, pluralLabel }) =>
+      value ? `${value} ${value === 1 ? label : pluralLabel}` : ''
+    )
     .filter(Boolean)
     .join(', ');
 };

@@ -44,11 +44,13 @@ export const WhatButton: FC<{ className?: string }> = ({ className }) => {
       type="button"
       onClick={play}
       className={clsx(
-        'bg-white text-black py-2 px-4 uppercase font-bold text-xl hover:opacity-60 cursor-pointer',
+        'bg-white text-black py-2 px-4 font-bold text-xl hover:opacity-60 cursor-pointer',
         className
       )}
     >
-      <i>WHAT</i>
+      <i>
+        Say <q>wEH</q>
+      </i>
     </button>
   );
 };
