@@ -66,9 +66,7 @@ const checkIfAlbumWasReleased = async (): Promise<boolean> => {
     throw new Error('Failed to fetch albums or no albums available');
   }
 
-  return !!response.items.some(
-    (album) => album.name.toLowerCase() === 'i am music'
-  );
+  return !!response.items.some((album) => album.name.toLowerCase() === 'music');
 };
 
 const HomePage: FC = async () => {
